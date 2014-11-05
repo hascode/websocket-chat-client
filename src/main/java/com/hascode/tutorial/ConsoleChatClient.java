@@ -8,21 +8,21 @@ import java.net.URISyntaxException;
 import javax.json.Json;
 import javax.json.JsonObject;
 
-public class ChatClient {
+public class ConsoleChatClient {
 	public static void main(final String[] args) throws InterruptedException, URISyntaxException {
 		Console console = System.console();
-		String userName = console.readLine("Please enter your user name: ");
-		String roomName = console.readLine("Please enter a chat-room name: ");
+		final String userName = console.readLine("Please enter your user name: ");
+		final String roomName = console.readLine("Please enter a chat-room name: ");
 		System.out.println("connecting to chat-room " + roomName);
+
 		final ChatClientEndpoint clientEndPoint = new ChatClientEndpoint(new URI("ws://0.0.0.0:8080/hascode/chat/" + roomName));
-		clientEndPoint.addMessageHandler(response -> {
-			System.out.println(jsonMessageToString(response, roomName));
+		clientEndPoint.addMessageHandler(responseString -> {
+			System.out.println(jsonMessageToString(responseString, roomName));
 		});
 
 		while (true) {
-			String message = console.readLine("%s@%s: ", userName, roomName);
+			String message = console.readLine();
 			clientEndPoint.sendMessage(stringToJsonMessage(userName, message));
-			Thread.sleep(30000);
 		}
 	}
 
