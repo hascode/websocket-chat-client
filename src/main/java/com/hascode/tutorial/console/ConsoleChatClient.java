@@ -1,4 +1,4 @@
-package com.hascode.tutorial;
+package com.hascode.tutorial.console;
 
 import java.io.Console;
 import java.io.StringReader;
@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+
+import com.hascode.tutorial.ChatClientEndpoint;
 
 public class ConsoleChatClient {
 	public static void main(final String[] args) throws InterruptedException, URISyntaxException {

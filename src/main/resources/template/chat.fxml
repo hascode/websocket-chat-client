@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hascode.tutorial.ChatController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hascode.tutorial.gui.ChatController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -29,12 +29,12 @@
          <children>
             <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
             <Label text="Username" />
-            <TextField />
+            <TextField fx:id="userNameTextfield"/>
             <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
             <Label text="Chatroom" />
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox prefWidth="150.0" fx:id="roomSelection" />
             <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
-            <Button mnemonicParsing="false" text="Connect" />
+            <Button mnemonicParsing="false" text="Connect" fx:id="connectButton"/>
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />
@@ -45,10 +45,10 @@
       </VBox>
    </left>
    <center>
-      <TreeTableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TreeTableView prefHeight="180.0" prefWidth="150.0" BorderPane.alignment="CENTER">
         <columns>
           <TreeTableColumn prefWidth="75.0" />
-          <TreeTableColumn prefWidth="150.0" />
+          <TreeTableColumn prefWidth="100.0" />
             <TreeTableColumn minWidth="0.0" prefWidth="120.0" />
         </columns>
       </TreeTableView>
@@ -64,6 +64,16 @@
       </Label>
    </bottom>
    <right>
-      <Pane prefHeight="347.0" prefWidth="44.0" BorderPane.alignment="CENTER" />
+    <VBox prefHeight="347.0" prefWidth="94.0" BorderPane.alignment="CENTER">
+       <children>
+            <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
+            <Label text="Message" />
+            <TextField fx:id="messageTextField"/>
+            <Button mnemonicParsing="false" text="Send" fx:id="chatButton"/>
+         </children>
+                  <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </VBox>
    </right>
 </BorderPane>

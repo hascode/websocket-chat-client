@@ -1,4 +1,4 @@
-package com.hascode.tutorial;
+package com.hascode.tutorial.gui;
 
 import java.io.IOException;
 
