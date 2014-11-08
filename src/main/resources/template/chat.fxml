@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hascode.tutorial.ChatController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Exit" fx:id="exitItem"/>
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="?">
+              <items>
+                <MenuItem mnemonicParsing="false" text="About" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <VBox prefHeight="371.0" prefWidth="125.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
+            <Label text="Username" />
+            <TextField />
+            <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
+            <Label text="Chatroom" />
+            <ChoiceBox prefWidth="150.0" />
+            <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
+            <Button mnemonicParsing="false" text="Connect" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <TreeTableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TreeTableColumn prefWidth="75.0" />
+          <TreeTableColumn prefWidth="150.0" />
+            <TreeTableColumn minWidth="0.0" prefWidth="120.0" />
+        </columns>
+      </TreeTableView>
+   </center>
+   <bottom>
+      <Label text="Micha Kops - www.hascode.com" textFill="#9e9e9e" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="11.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </BorderPane.margin>
+      </Label>
+   </bottom>
+   <right>
+      <Pane prefHeight="347.0" prefWidth="44.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
