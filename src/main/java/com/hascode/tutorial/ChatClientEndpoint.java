@@ -13,7 +13,7 @@ import javax.websocket.WebSocketContainer;
 
 @ClientEndpoint
 public class ChatClientEndpoint {
-	Session userSession = null;
+	private Session userSession = null;
 	private MessageHandler messageHandler;
 
 	public ChatClientEndpoint(final URI endpointURI) {
