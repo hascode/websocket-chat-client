@@ -13,18 +13,36 @@ You may run the console or gui client the following way, precondition is an inst
 
 You may either run the client using Maven's Exec Plugin:
 
-   mvn exec:java -Dexec.mainClass=com.hascode.tutorial.console.ConsoleChatClient 
+   
+```
+#!bash
+
+mvn exec:java -Dexec.mainClass=com.hascode.tutorial.console.ConsoleChatClient 
+```
+
 
 
 ### JavaFX GUI Client
 
 You may either run the client using Maven's Exec Plugin:
 
-   mvn exec:java -Dexec.mainClass=com.hascode.tutorial.gui.GuiChatClient
+   
+```
+#!bash
+
+mvn exec:java -Dexec.mainClass=com.hascode.tutorial.gui.GuiChatClient
+```
+
 
 Or simply package the application and run it with Java:
 
-   mvn clean package && java -cp target/websocket-chat-client-1.0.0.jar com.hascode.tutorial.gui.GuiChatClient
+  
+```
+#!bash
+
+ mvn clean package && java -cp target/websocket-chat-client-1.0.0.jar com.hascode.tutorial.gui.GuiChatClient
+
+```
 
 ----
 
