@@ -2,6 +2,27 @@
 
 An example of Java's websocket client API to connect to the chat server from my other tutorials "[Creating a Websocket Chat Application with Vert.x and Java]" or "[Creating a Chat Application using Java EE 7, Websockets and GlassFish 4]".
 
+## Running the Chat Client
+
+You may run the console or gui client the following way, precondition is an installed JDK8 and Maven..
+
+### Console Client
+
+You may either run the client using Maven's Exec Plugin:
+
+   mvn exec:java -Dexec.mainClass=com.hascode.tutorial.console.ConsoleChatClient 
+
+
+### JavaFX GUI Client
+
+You may either run the client using Maven's Exec Plugin:
+
+   mvn exec:java -Dexec.mainClass=com.hascode.tutorial.gui.GuiChatClient
+
+Or simply package the application and run it with Java:
+
+   mvn clean package && java -cp /data/project/java-websocket-chat-client/target/websocket-chat-client-1.0.0.jar com.hascode.tutorial.gui.GuiChatClient
+
 ----
 
 **2014 Micha Kops / hasCode.com**
