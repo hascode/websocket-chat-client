@@ -13,12 +13,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Exit" fx:id="exitItem"/>
+              <MenuItem fx:id="exitItem" mnemonicParsing="false" text="Exit" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="?">
               <items>
-                <MenuItem mnemonicParsing="false" text="About" />
+                <MenuItem mnemonicParsing="false" text="About" fx:id="aboutMenuItem"/>
               </items>
             </Menu>
         </menus>
@@ -29,12 +29,12 @@
          <children>
             <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
             <Label text="Username" />
-            <TextField fx:id="userNameTextfield"/>
+            <TextField fx:id="userNameTextfield" />
             <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
             <Label text="Chatroom" />
-            <ChoiceBox prefWidth="150.0" fx:id="roomSelection" />
+            <ChoiceBox fx:id="roomSelection" prefWidth="150.0" />
             <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
-            <Button mnemonicParsing="false" text="Connect" fx:id="connectButton"/>
+            <Button fx:id="connectButton" mnemonicParsing="false" text="Connect" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />
@@ -45,35 +45,38 @@
       </VBox>
    </left>
    <center>
-      <TreeTableView prefHeight="180.0" prefWidth="150.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TreeTableColumn prefWidth="75.0" />
-          <TreeTableColumn prefWidth="100.0" />
-            <TreeTableColumn minWidth="0.0" prefWidth="120.0" />
-        </columns>
-      </TreeTableView>
+      <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="chatListView"/>
    </center>
    <bottom>
-      <Label text="Micha Kops - www.hascode.com" textFill="#9e9e9e" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="11.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets bottom="5.0" top="5.0" />
-         </BorderPane.margin>
-      </Label>
-   </bottom>
-   <right>
-    <VBox prefHeight="347.0" prefWidth="94.0" BorderPane.alignment="CENTER">
-       <children>
-            <Separator orientation="VERTICAL" prefHeight="50.0" visible="false" />
-            <Label text="Message" />
-            <TextField fx:id="messageTextField"/>
-            <Button mnemonicParsing="false" text="Send" fx:id="chatButton"/>
+      <VBox prefHeight="83.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="messageTextField" prefHeight="40.0" prefWidth="281.0" />
+                  <Button fx:id="chatButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" text="Send">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></Button>
+               </children>
+               <VBox.margin>
+                  <Insets left="126.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label prefHeight="33.0" prefWidth="177.0" text="Micha Kops - www.hascode.com" textFill="#9e9e9e">
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="300.0" />
+               </VBox.margin>
+            </Label>
          </children>
-                  <padding>
-            <Insets left="10.0" right="10.0" />
+         <padding>
+            <Insets top="10.0" />
          </padding>
       </VBox>
+   </bottom>
+   <right>
+      <Pane prefHeight="334.0" prefWidth="18.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

@@ -9,10 +9,18 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -38,6 +46,12 @@ public class ChatController implements Initializable {
 	@FXML
 	private Button chatButton;
 
+	@FXML
+	private MenuItem aboutMenuItem;
+
+	@FXML
+	private ListView<String> chatListView;
+
 	private final ChatModel model = new ChatModel();
 
 	private ChatClientEndpoint clientEndPoint;
@@ -47,27 +61,54 @@ public class ChatController implements Initializable {
 		exitItem.setOnAction(e -> Platform.exit());
 		roomSelection.setItems(FXCollections.observableArrayList("arduino", "java", "groovy", "scala"));
 		roomSelection.getSelectionModel().select(1);
-		model.readyToChat.bind(userNameTextfield.textProperty().isNotEmpty().and(roomSelection.selectionModelProperty().isNotNull()));
+		model.userName.bindBidirectional(userNameTextfield.textProperty());
+		model.roomName.bind(roomSelection.getSelectionModel().selectedItemProperty());
+		model.readyToChat.bind(model.userName.isNotEmpty().and(roomSelection.selectionModelProperty().isNotNull()));
 		chatButton.disableProperty().bind(model.connected.not());
 		messageTextField.disableProperty().bind(model.connected.not());
+		messageTextField.textProperty().bindBidirectional(model.currentMessage);
 		connectButton.disableProperty().bind(model.readyToChat.not());
+		chatListView.setItems(model.chatHistory);
+		messageTextField.setOnAction(event -> {
+			handleSendMessage();
+		});
 		chatButton.setOnAction(evt -> {
-			clientEndPoint.sendMessage(stringToJsonMessage(userNameTextfield.getText(), messageTextField.getText()));
+			handleSendMessage();
 		});
 		connectButton.setOnAction(evt -> {
 			try {
-				final String roomName = roomSelection.getSelectionModel().getSelectedItem();
-
-				clientEndPoint = new ChatClientEndpoint(new URI("ws://0.0.0.0:8080/hascode/chat/" + roomName));
+				clientEndPoint = new ChatClientEndpoint(new URI("ws://0.0.0.0:8080/hascode/chat/" + model.roomName.get()));
 				clientEndPoint.addMessageHandler(responseString -> {
-					System.out.println(jsonMessageToString(responseString, roomName));
+					Platform.runLater(() -> {
+						model.chatHistory.add(jsonMessageToString(responseString, model.roomName.get()));
+					});
 				});
 				model.connected.set(true);
 			} catch (Exception e) {
-				e.printStackTrace();
+				showDialog("Error: " + e.getMessage());
 			}
 
 		});
+		aboutMenuItem.setOnAction(event -> {
+			showDialog("Example websocket chat bot written in JavaFX.\n\n Please feel free to visit my blog at www.hascode.com for the full tutorial!\n\n2014 Micha Kops");
+		});
+	}
+
+	private void handleSendMessage() {
+		clientEndPoint.sendMessage(stringToJsonMessage(model.userName.get(), model.currentMessage.get()));
+		model.currentMessage.set("");
+		messageTextField.requestFocus();
+	}
+
+	private void showDialog(final String message) {
+		Stage dialogStage = new Stage();
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		VBox box = new VBox();
+		box.getChildren().addAll(new Label(message));
+		box.setAlignment(Pos.CENTER);
+		box.setPadding(new Insets(5));
+		dialogStage.setScene(new Scene(box));
+		dialogStage.show();
 	}
 
 	private static String stringToJsonMessage(final String user, final String message) {
