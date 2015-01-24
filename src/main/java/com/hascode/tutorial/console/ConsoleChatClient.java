@@ -18,8 +18,11 @@ public class ConsoleChatClient {
 		System.out.println("connecting to chat-room " + roomName);
 
 		final ChatClientEndpoint clientEndPoint = new ChatClientEndpoint(new URI("ws://0.0.0.0:8080/hascode/chat/" + roomName));
-		clientEndPoint.addMessageHandler(responseString -> {
-			System.out.println(jsonMessageToString(responseString, roomName));
+		clientEndPoint.addMessageHandler(new ChatClientEndpoint.MessageHandler() {
+			@Override
+			public void handleMessage(final String responseString) {
+				System.out.println(jsonMessageToString(responseString, roomName));
+			}
 		});
 
 		while (true) {
